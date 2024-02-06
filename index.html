@@ -32,15 +32,48 @@
         .dancing-image {
             width: 300px;
             height: 400px;
-            animation: dance 2s infinite alternate;
+            animation: rotate 4s linear infinite;
         }
 
-        @keyframes dance {
+        .rave-text {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            animation: changeColor 5s infinite;
+        }
+
+        @keyframes rotate {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: rotate(0deg);
             }
             100% {
-                transform: translateY(-20px) rotate(10deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes changeColor {
+            0% {
+                color: #ff0000; /* Röd */
+            }
+            16.666% {
+                color: #ff9900; /* Orange */
+            }
+            33.333% {
+                color: #ffff00; /* Gul */
+            }
+            50% {
+                color: #00ff00; /* Grön */
+            }
+            66.666% {
+                color: #0000ff; /* Blå */
+            }
+            83.333% {
+                color: #9900ff; /* Lila */
+            }
+            100% {
+                color: #ff0000; /* Återgå till rött */
             }
         }
     </style>
@@ -55,7 +88,7 @@
         Your browser does not support the audio element.
     </audio>
 
-    <h1>Välkommen till middel earth gollum</h1>
+    <h1 class="rave-text" onclick="toggleColor()">Välkommen till middel earth</h1>
     <p>.</p>
 
     <script>
@@ -70,6 +103,18 @@
             } else {
                 audio.pause();
                 toggleButton.innerHTML = "Starta musik";
+            }
+        }
+
+        function toggleColor() {
+            const raveText = document.querySelector('.rave-text');
+            colorChanged = !colorChanged;
+
+            if (colorChanged) {
+                raveText.style.animation = 'none'; // Avbryt befintlig animation
+                raveText.style.color = '#ffffff'; // Ändra textfärg till vit
+            } else {
+                raveText.style.animation = 'changeColor 5s infinite'; // Återgå till regnbågsanimation
             }
         }
     </script>
